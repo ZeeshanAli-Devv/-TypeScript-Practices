@@ -1,202 +1,139 @@
-//  💡 10 Practice Tasks — TypeScript Objects
-// 🧩 Basic Object
+/* 🧩 OBJECTS — 10 Practice Questions */
 
-// 1️⃣ Create an object car with properties brand (string), model (string), and year (number).
-// Log the car details.
+// 1. Create an object person with name, age, and isStudent (boolean).
+
+const person : {
+    
+    name: string,
+    age: number,
+    isStudent: boolean
+    
+} = {
+    name: "shan",
+    age: 22,
+    isStudent: true
+}
+
+console.log(person);
+
+// 2. Create an object product with readonly property id and price as number.
+
+const product : {
+
+    readonly id: number,
+    price: number
+
+} = {
+    id: 2,
+    price: 1200,
+}
+
+// console.log(product.id = 5); give me error because it's can't reasign
+console.log(product);
+
+// 3. Create a function printBook that accepts a book object with title & author.
+
+function printBook(book: {title: string, author: string}){
+    console.log(book.title, book.author)
+}
+
+printBook({title: "Rich Dad Poor Dad", author: "Robart"})
+
+// 4. Create an object car that has a method start() returning "Car started".
 
 const car : {
-    brand : string,
-    model : string,
-    year  : number
-} = {
-
-    brand : "Nissan",
-    model : "New",
-    year  : 2025,
+    start: () => string
+}={
+    start: () => {
+        return "Car started"
+    }
 }
+console.log(car.start())
 
-console.log(car);
+    // 5. Create an object student with optional property grade.
 
+    const student : {
 
-// 🧩 Optional Property
+        grade?: string,
 
-// 2️⃣ Create an object student with properties:
-// name (string), age (number, optional).
-// Log only the name if age is missing.
+    } = {
 
-const student : {
+        grade : "A"
+    }
+
+    console.log({grade: "A"});
+    console.log(student);
+
+// 6. Create a type User and make an object using that type.
+
+type User = {
     name: string,
-    age? : number,
+    age: number
+}
+
+let user : User = {
+    name  : "shan",
+    age: 22
+}
+
+console.log(user);
+
+
+// 7. Create an object employee that includes another nested object address.
+
+let employee : {
+    emp1 : {
+        address: string
+    }
 } = {
-    name: "shan",
+    emp1 : {
+        address : "No Way Home"
+    }
 }
-console.log(student)
-
-// 🧩 Readonly Property
-
-// 3️⃣ Create an object book with readonly property isbn (number) and a normal property title (string).
-// Try changing isbn (should show error).
+console.log(employee.emp1);
 
 
-const book : {
-    readonly isbn: number,
-    title : string
+// 8. Create an object with a method getFullName() that returns firstName + lastName.
+
+let userInfo : {
+
+    firstName: string,
+    lastName: string
+    getFullName: () => string
 } = {
-    isbn : 2,
-    title: "Apple"
-}
-// console.log(book.isbn = 4) // give me error
-console.log(book) 
-
-// 🧩 Object with Function
-
-// 4️⃣ Create an object user with properties:
-// username (string),
-// email (string),
-// and a method displayInfo() that returns a formatted string.
-
-const user : {
-
-    username: string,
-    email: string,
-    displayInfo: () => string
-} = {
-    username: "shan",
-    email: "shan@gmail.com",
-    displayInfo() {
-        return `${user.username}, ${user.email}`
-    } 
-}
-
-console.log(user.displayInfo())
-
-// 🧩 Object Type Reuse
-
-// 5️⃣ Create a type Product that defines name, price, and inStock.
-// Then make two objects (p1, p2) using that type.
-
-type Product =  {
-    name: string, 
-    price: number, 
-    inStock: number,
-}
-
-let product1 : Product = {
-    name: "watch", 
-    price: 1200, 
-    inStock: 20,
-}
-
-let product2 : Product = {
-    name: "umbrella", 
-    price: 1400, 
-    inStock: 10,
-}
-
-console.log(product1, product2)
-
-// 🧩 Nested Object
-
-// 6️⃣ Create an object employee that has:
-
-// name (string)
-
-// address (object with city and country)
-
-// getAddress() method that returns full address as string.
-
-const employee : {
-    name: string,
-    address : {
-        city: string,
-        country: string
-    },
-    getAddress : () => string
-} = {
-
-    name: "sam",
-    address: {
-        city: "isl",
-        country: "pak"
-    },
-    getAddress() {
-        return `Your Name is ${employee.name} from ${employee.address.city} ${employee.address.country}`
+    firstName: "Zee",
+    lastName: "Ali",
+    getFullName() {
+        return `First Name: ${userInfo.firstName} Last Name: ${userInfo.lastName}`
     },
 }
+console.log(userInfo.getFullName());
 
-console.log(employee.getAddress())
+// 9. Create a function printEmployee that takes an object with name and salary, and returns a formatted string.
 
-// 🧩 Object as Function Parameter
-
-// 7️⃣ Make a function printCourse() that takes an object with courseName and duration and logs both.
-
-function printCourse(info: {courseName: string, duration: number}){
-    console.log(info.courseName,info.duration)
+function printEmployee(obj : {name: string, salary: number}): string{
+    return `Your Name: ${obj.name}, & Your Salary: ${obj.salary}`
 }
+console.log(printEmployee({name: "shan", salary: 50000}));
 
-printCourse({courseName: "Math", duration: 2})
+// 10. Create an object calculator that has functions add, subtract, multiply, and divide.
 
-// 🧩 Array of Objects
-
-// 8️⃣ Create an array users that contains multiple objects with id, name, and age.
-// Then loop through and print all names.
-
-let users :{id: number, name: string, age: number}[] = [
-    
-    {id: 1, name: "Ali", age: 21},
-    {id: 2, name: "Shan", age: 22},
-
-] 
-
-for(let user of users) {
-    console.log(user.name)
-}
-
-// 🧩 Object with Optional Function
-
-// 9️⃣ Create an object player with:
-// name, score, and optional method celebrate() that logs “🎉 Winner!”
-
-const player : {
-    name: string,
-    score: number,
-    celebrate?: () => string
-} = {
-    name: "shan",
-    score: 25,
-    celebrate(){
-        return "Winner"
+let calculator = {
+    add: (a: number, b: number): number => {
+        return a + b
+    },
+    subtract: (a: number, b: number): number => {
+        return a - b
+    },
+    multiply: (a: number, b: number): number => {
+        return a * b
+    },
+    divide: (a: number, b: number): number => {
+        return a / b
     }
 }
 
-console.log(player.name, player.score)
-
-// 🧩 Readonly + Nested + Function Combo
-
-// 🔟 Create a complex object account:
-
-// readonly id
-
-// owner (object with name, email)
-
-// method getSummary() → returns "Account of {name}".
-
-const account : {
-    readonly id: number,
-    owner: {
-        name : string,
-        email: string
-    },
-    getSummary: () => string
-} = {
-    id: 2,
-    owner: {
-        name: "shan",
-        email: "shan@gmail.com"
-    },
-    getSummary() {
-        return `Account of ${this.owner.name}`
-    },
-}
-
-console.log(account.getSummary())
+console.log(calculator.add(4,6));
+console.log(calculator.subtract(4,6));
+console.log(calculator.multiply(4,6));
+console.log(calculator.divide(4,6).toFixed(2));

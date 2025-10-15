@@ -1,142 +1,103 @@
-// 1️⃣
+/* 🧠 FUNCTIONS — 10 Practice Questions */
 
-// Ek function greet() likho —
-// jo "Hello, World!" return kare.
-// Return type string rakho.
+// 1. Create a function addNumbers that takes two numbers and returns their sum.
 
-function greet(): string{
-    return "Hello, World!"
-}
-console.log(greet())
-
-// 2️⃣
-
-// Ek function addNumbers(a: number, b: number) likho —
-// jo dono ka sum return kare.
-// Return type number rakho.
-
-function addNumbers(a: number, b: number): number{
+const addNumbers = (a: number, b: number) : number => {
     return a + b
 }
 
-console.log(addNumbers(5,7))
-// 3️⃣
+console.log(addNumbers(3,5))
 
-// Ek function sayHello(name: string, age?: number) likho —
-// jo name zarur le, lekin age optional ho.
-// Agar age di gayi ho to "Hello <name>, age <age>" print kare,
-// warna "Hello <name>".
+// 2. Create a function greetUser that takes a string name and logs a greeting.
 
-function sayHello(name: string, age?: number): string | number {
-   if(age !== undefined)
-   {
-    return `Hello: ${name}, Age: ${age}`
-   }
-   else{
-    return `Hello ${name}`
-   }
+const greetUser = (name: string): string => {
+    return `Name: ${name}`
 }
 
-console.log(sayHello("shan"))
-console.log(sayHello("shan", 22))
+console.log(greetUser("shan"))
 
-// 4️⃣
+// 3. Create a function calculateArea with default parameter pi = 3.14 that calculates circle area.
 
-// Ek function multiply(a: number, b: number = 5) likho —
-// agar second argument na mile to default 5 le aur result return kare.
-
-function multiply(a: number, b: number = 5): number{
-    return a * b
-}
-console.log(multiply(3))
-console.log(multiply(3,2))
-
-// 5️⃣
-
-// Ek arrow function divide likho —
-// jo do numbers le aur division ka result return kare.
-// Return type number ho.
-
-const divide = (x: number, y: number): number => {
-    return x / y
+function calculateArea(radius: number, pi: number = 3.14): void{
+    console.log(pi * radius * radius)
 }
 
-console.log(divide(4,5))
+calculateArea(5)
 
-// 6️⃣
+// 4. Create a function multiply where the second parameter is optional.
 
-// Ek function printMessage(message: string): void likho —
-// jo bas console me "Message: <message>" print kare.
-// Return kuch nahi (void).
-
-function printMessage(message: string): void {
-    console.log(`Welcome: ${message}`)
-}
-
-printMessage("Back")
-
-// 7️⃣
-
-// Ek function getFullName(first: string, last: string) likho —
-// jo full name return kare "first last" format me.
-// Arrow function version bhi likho.
-
-const getFullName = (first: string, last: string) : string => {
-    return `${first} ${last}`
-}
-console.log(getFullName("Zee", "Ali"))
-
-// 8️⃣
-
-// Ek function calculate(operation: string, a: number, b: number) likho —
-// agar "add" ho to sum return kare,
-// agar "subtract" ho to difference return kare,
-// warna "Invalid operation" return kare.
-
-const calculate = (operation: string, a: number, b: number): string | number => {
-    if(operation === "add")
+const multiply = (a: number, b?: number): number => {
+    if(b !== undefined)
     {
-        return a + b
-    }
-    else if(operation === "subtract")
-    {
-        return a - b
+        return a * b
     }
     else{
-        return "Invalid operation"
+        return a
+    }
+}
+console.log(multiply(12,22))
+
+// 5. Create an arrow function isEven that returns true if a number is even.
+
+const isEven = (num: number): boolean => {
+    if(num % 2 === 0)
+    {
+        return true
+    }
+    else{
+        return false
     }
 }
 
-console.log(calculate("add", 4, 6))
+console.log(isEven(6))
 
-// 9️⃣
+// 6. Create a function getLength that can accept either a string or an array and returns its length (union type).
 
-// Ek function type alias banao:
-
-// type MathOperation = (x: number, y: number) => number;
-
-
-// Phir const multiplyNumbers: MathOperation likho jo x * y return kare.
-
-type MathOperation = (x: number, y: number) => number;
-
-const multiplyNumbers: MathOperation = (x,y) =>{
-    return x * y
+function getLength(myLen: string | any[]): number {
+    return myLen.length
 }
 
-// 🔟
+console.log(getLength("shan"))
 
-// Ek higher-order function executeTwice(fn: () => void) likho —
-// jo diye gaye function ko 2 baar call kare.
+// 7. Create a function displayUser that returns void but logs user details.
 
-function executeTwice(fn: ()=> void){
-    fn()
-    fn()
+function displayUser(user: string): void{
+    console.log(`User: ${user}`)
 }
 
-function greets()
-{
-    console.log("Hello")
+console.log(displayUser("Ali"))
+
+// 8. Create a function throwError that always throws an error (use never type).
+
+function throwError(): never{
+    throw new Error ("App Crashed!")
+}
+// console.log(throwError())  //give us error
+
+// 9. Create a function convertToUpper that takes a string | null and returns uppercase (handle nullable type).
+
+function convertToUpper(word: string | null){
+    if(typeof word === "string")
+    {
+        return word.toUpperCase()
+    }
+    else{
+        return null
+    }
+}
+console.log(convertToUpper("shan"))
+console.log(convertToUpper(null))
+
+// 10. Create a function sumAll that takes rest parameters and returns their total.
+
+function sumAll(...num: number[]): number{
+    let sum = 0
+
+    for(let i=0; i<num.length; i++)
+    {
+        sum += num[i]!
+    }
+    return sum
 }
 
-executeTwice(greets)
+sumAll(2, 4, 6, 10)

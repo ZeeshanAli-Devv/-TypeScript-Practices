@@ -1,95 +1,64 @@
-// 1️⃣
-// Ek function greet() likho —
-// jo "Hello, World!" return kare.
-// Return type string rakho.
-function greet() {
-    return "Hello, World!";
-}
-console.log(greet());
-// 2️⃣
-// Ek function addNumbers(a: number, b: number) likho —
-// jo dono ka sum return kare.
-// Return type number rakho.
-function addNumbers(a, b) {
+/* 🧠 FUNCTIONS — 10 Practice Questions */
+// 1. Create a function addNumbers that takes two numbers and returns their sum.
+var addNumbers = function (a, b) {
     return a + b;
+};
+console.log(addNumbers(3, 5));
+// 2. Create a function greetUser that takes a string name and logs a greeting.
+var greetUser = function (name) {
+    return "Name: ".concat(name);
+};
+console.log(greetUser("shan"));
+// 3. Create a function calculateArea with default parameter pi = 3.14 that calculates circle area.
+function calculateArea(radius, pi) {
+    if (pi === void 0) { pi = 3.14; }
+    console.log(pi * radius * radius);
 }
-console.log(addNumbers(5, 7));
-// 3️⃣
-// Ek function sayHello(name: string, age?: number) likho —
-// jo name zarur le, lekin age optional ho.
-// Agar age di gayi ho to "Hello <name>, age <age>" print kare,
-// warna "Hello <name>".
-function sayHello(name, age) {
-    if (age !== undefined) {
-        return "Hello: ".concat(name, ", Age: ").concat(age);
+calculateArea(5);
+// 4. Create a function multiply where the second parameter is optional.
+var multiply = function (a, b) {
+    if (b !== undefined) {
+        return a * b;
     }
     else {
-        return "Hello ".concat(name);
+        return a;
     }
-}
-console.log(sayHello("shan"));
-console.log(sayHello("shan", 22));
-// 4️⃣
-// Ek function multiply(a: number, b: number = 5) likho —
-// agar second argument na mile to default 5 le aur result return kare.
-function multiply(a, b) {
-    if (b === void 0) { b = 5; }
-    return a * b;
-}
-console.log(multiply(3));
-console.log(multiply(3, 2));
-// 5️⃣
-// Ek arrow function divide likho —
-// jo do numbers le aur division ka result return kare.
-// Return type number ho.
-var divide = function (x, y) {
-    return x / y;
 };
-console.log(divide(4, 5));
-// 6️⃣
-// Ek function printMessage(message: string): void likho —
-// jo bas console me "Message: <message>" print kare.
-// Return kuch nahi (void).
-function printMessage(message) {
-    console.log("Welcome: ".concat(message));
-}
-printMessage("Back");
-// 7️⃣
-// Ek function getFullName(first: string, last: string) likho —
-// jo full name return kare "first last" format me.
-// Arrow function version bhi likho.
-var getFullName = function (first, last) {
-    return "".concat(first, " ").concat(last);
-};
-console.log(getFullName("Zee", "Ali"));
-// 8️⃣
-// Ek function calculate(operation: string, a: number, b: number) likho —
-// agar "add" ho to sum return kare,
-// agar "subtract" ho to difference return kare,
-// warna "Invalid operation" return kare.
-var calculate = function (operation, a, b) {
-    if (operation === "add") {
-        return a + b;
-    }
-    else if (operation === "subtract") {
-        return a - b;
+console.log(multiply(12, 22));
+// 5. Create an arrow function isEven that returns true if a number is even.
+var isEven = function (num) {
+    if (num % 2 === 0) {
+        return true;
     }
     else {
-        return "Invalid operation";
+        return false;
     }
 };
-console.log(calculate("add", 4, 6));
-var multiplyNumbers = function (x, y) {
-    return x * y;
-};
-// 🔟
-// Ek higher-order function executeTwice(fn: () => void) likho —
-// jo diye gaye function ko 2 baar call kare.
-function executeTwice(fn) {
-    fn();
-    fn();
+console.log(isEven);
+// 6. Create a function getLength that can accept either a string or an array and returns its length (union type).
+function getLength(myLen) {
+    return myLen.length;
 }
-function greets() {
-    console.log("Hello");
+console.log(getLength("shan"));
+// 7. Create a function displayUser that returns void but logs user details.
+function displayUser(user) {
+    console.log("User: ".concat(user));
 }
-executeTwice(greets);
+console.log(displayUser("Ali"));
+// 8. Create a function throwError that always throws an error (use never type).
+function throwError() {
+    throw new Error("App Crashed!");
+}
+// console.log(throwError())  //give us error
+// 9. Create a function convertToUpper that takes a string | null and returns uppercase (handle nullable type).
+function convertToUpper(word) {
+    if (typeof word === "string") {
+        return word.toUpperCase();
+    }
+    else {
+        return null;
+    }
+}
+console.log(convertToUpper("shan"));
+console.log(convertToUpper(null));
+// 10. Create a function sumAll that takes rest parameters and returns their total.
