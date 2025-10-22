@@ -1,0 +1,116 @@
+// ✅ 1. typeof – (Primitive types ke liye best)
+// Use jab type string, number, boolean, bigint, symbol, undefined, object ya function ho.
+
+function check(input: string | number) {
+    
+    if(typeof input === "string")
+    {
+        console.log(`STRING: ${input}`)
+    }
+    else{
+        console.log(`NUMBER: ${input}`)
+    }
+}
+
+check("shan")
+check(12)
+
+
+// ✅ 2. instanceof – (Class / Date / Object instances ke liye best)
+
+function showDetail(data: Date | string) {
+    if(data instanceof Date)
+    {
+        console.log(`DATE: ${data.toDateString()}`)
+    }
+    else{
+        console.log(`STRING: ${data}`)
+    }
+}
+showDetail(new Date())
+showDetail("19-10-2025")
+
+// ✅ 3. in operator – (Object me property check karne ke liye best)
+// Use jab union types me common properties na ho, aur aap key se identify kar sakte ho.
+
+type Car = { brand: string; model: string };
+type Bike = { brand: string; cc: number };
+
+function showVehicle(v: Car | Bike) {
+    if("model" in v)
+    {
+        console.log(`Car: ${v.brand}, ${v.model}`)
+    }
+    else{
+        console.log(`Bike: ${v.brand}, ${v.cc}`)
+    }
+}
+
+showVehicle({ brand: "Toyota", model: "Corolla" });
+showVehicle({ brand: "Honda", cc: 150 });
+
+// ✅ 4. Discriminated Union – (Best Pattern for union logic)
+// Union me common type ya kind field rakh kar check karte hain.
+// Ye TypeScript ka sabse clean aur maintainable pattern maana jata hai.
+
+
+type Dog = { type: "dog"; sound: string };
+type Cat = { type: "cat"; sound: string };
+
+function makeSound(animal: Dog | Cat){
+    if(animal.type === "dog")
+    {
+        console.log("DOG SOUND:"+ animal.sound)
+    }
+    else{   
+        console.log("CAT SOUND:"+ animal.sound)
+    }
+}
+
+makeSound({type: "dog", sound: "Woof!"})
+makeSound({type: "cat", sound: "Meow!"})
+
+// ✅ 5. Custom Type Guard – (Large apps me BEST for reuse & clean code)
+// Jab condition baar-baar lagani ho → custom guard banao, code clean & reusable ho jata.
+
+type Admin = { role: "admin"; access: string[] }
+type User = { role: "user"; name: string }
+
+function isAdmin(person: Admin | User): person is Admin {
+    return person.role === "admin"
+}
+
+function showInfo(person: Admin | User){
+    if(isAdmin(person))
+    {
+        console.log(`Admin Access: ${person.access}`)
+    }
+    else{
+        console.log(`User Name: ${person.name}`)
+    }
+}
+showInfo({ role: "admin", access: ["dashboard", "settings"] })
+showInfo({ role: "user", name: "Zeeshan" })
+
+
+// TASK  - 5
+
+type SuccessResponse = { status: "success"; data: string }
+type ErrorResponse = { status: "error"; message: string }
+
+function isSuccess(res: SuccessResponse | ErrorResponse): res is SuccessResponse {
+    return res.status === "success"
+}
+
+function handleResponse(res: SuccessResponse | ErrorResponse) {
+    if(isSuccess(res))
+    {
+        console.log(`Data: ${res.data}`)
+    }
+    else{
+        console.log(`Error: ${res.message}`)
+    }
+}
+
+handleResponse({ status: "success", data: "User created" })
+handleResponse({ status: "error", message: "Invalid request" })

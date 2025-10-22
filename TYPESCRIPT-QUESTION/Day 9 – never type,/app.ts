@@ -163,4 +163,4 @@ console.log(typeGuard(22))
 function shutdown(): never{
     console.log("Shutting down...")
     throw new Error("Power off");
-} 
+}       
